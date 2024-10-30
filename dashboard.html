@@ -87,7 +87,7 @@
             // Reminder to update goals
             setInterval(function() {
                 alert('Reminder: Have you updated your financial goals today? Stay on track!');
-            }, 300000); // Remind every 5 minutes // Remind every 30 seconds
+            }, 300000); // Remind every 5 minutes
         });
     </script>
     <style>
@@ -128,6 +128,30 @@
             font-style: italic;
             font-size: 1.2em;
             text-align: center;
+        }
+        .template-download {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .template-download h3 {
+            margin-bottom: 15px;
+        }
+        .template-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .template-list li {
+            margin-bottom: 10px;
+        }
+        .template-list a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .template-list a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -225,46 +249,5 @@
                     <h3>Set Your Financial Goals</h3>
                     <form class="goal-form" action="save_goal.php" method="POST">
                         <label for="goal">Financial Goal:</label>
-                        <input type="text" id="goal" name="goal" placeholder="e.g., Save $500 in 3 months" required>
+                        <input type="text" id="goal" name="goal" placeholder
 
-                        <label for="goal-deadline">Deadline:</label>
-                        <input type="date" id="goal-deadline" name="goal-deadline" required>
-
-                        <button type="submit" class="cta-button">Set Goal</button>
-                    </form>
-                </div>
-
-                <div class="notifications">
-                    <h3>Notifications</h3>
-                    <ul>
-                        <?php
-                        // Reconnect to database
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-
-                        // Fetch user notifications
-                        $sql = "SELECT notification_text FROM notifications WHERE user_id = ?";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->bind_param("i", $user_id);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<li class='notification-item'>" . htmlspecialchars($row['notification_text']) . "</li>";
-                        }
-
-                        $stmt->close();
-                        $conn->close();
-                        ?>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 The Financial Hookup. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html>
