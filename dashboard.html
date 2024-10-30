@@ -30,6 +30,18 @@
             $('.badge').on('click', function() {
                 alert('Keep up the great work! Earn more badges by completing your financial goals.');
             });
+
+            // Toggle challenge status
+            $('.challenge-item').on('click', function() {
+                var status = $(this).find('.status');
+                if (status.text() === 'Not Started') {
+                    status.text('In Progress');
+                } else if (status.text() === 'In Progress') {
+                    status.text('Completed');
+                } else {
+                    status.text('Not Started');
+                }
+            });
         });
     </script>
 </head>
@@ -117,9 +129,9 @@
                 <div class="challenges">
                     <h3>Challenges</h3>
                     <ul>
-                        <li>Complete the "Credit Basics" course - <span class="status">In Progress</span></li>
-                        <li>Make your first budget - <span class="status">Not Started</span></li>
-                        <li>Track expenses for 1 month - <span class="status">Not Started</span></li>
+                        <li class="challenge-item">Complete the "Credit Basics" course - <span class="status">In Progress</span></li>
+                        <li class="challenge-item">Make your first budget - <span class="status">Not Started</span></li>
+                        <li class="challenge-item">Track expenses for 1 month - <span class="status">Not Started</span></li>
                     </ul>
                 </div>
 
