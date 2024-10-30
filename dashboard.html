@@ -56,6 +56,27 @@
                         <li>Track expenses for 1 month - <span class="status">Not Started</span></li>
                     </ul>
                 </div>
+
+                <div class="goal-setting">
+                    <h3>Set Your Financial Goals</h3>
+                    <form class="goal-form" action="save_goal.php" method="POST">
+                        <label for="goal">Financial Goal:</label>
+                        <input type="text" id="goal" name="goal" placeholder="e.g., Save $500 in 3 months" required>
+
+                        <label for="goal-deadline">Deadline:</label>
+                        <input type="date" id="goal-deadline" name="goal-deadline" required>
+
+                        <button type="submit" class="cta-button">Set Goal</button>
+                    </form>
+                </div>
+
+                <div class="notifications">
+                    <h3>Notifications</h3>
+                    <ul>
+                        <li>Your goal to save $500 is 25% complete. Keep going!</li>
+                        <li>New course available: "Advanced Credit Management"</li>
+                    </ul>
+                </div>
             </div>
         </section>
     </main>
