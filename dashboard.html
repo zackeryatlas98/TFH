@@ -8,6 +8,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Animation for progress bar fill
+            $('.progress-bar-fill').each(function() {
+                var width = $(this).data('progress');
+                $(this).animate({
+                    width: width + '%'
+                }, 1000);
+            });
+
+            // Dismiss notifications
+            $('.notification-item').on('click', function() {
+                $(this).fadeOut(500, function() {
+                    $(this).remove();
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <header class="header">
@@ -61,7 +80,7 @@
                     $conn->close();
 
                     echo "<p>Level $progress_level - Credit Rookie</p>";
-                    echo "<div class='progress-bar'><div class='progress-bar-fill' style='width: $progress_percentage%;'></div></div>";
+                    echo "<div class='progress-bar'><div class='progress-bar-fill' data-progress='$progress_percentage' style='width: 0;'></div></div>";
                     echo "<p>$progress_percentage% to the next level</p>";
                     ?>
                 </div>
@@ -127,7 +146,7 @@
                         $result = $stmt->get_result();
 
                         while ($row = $result->fetch_assoc()) {
-                            echo "<li>" . htmlspecialchars($row['notification_text']) . "</li>";
+                            echo "<li class='notification-item'>" . htmlspecialchars($row['notification_text']) . "</li>";
                         }
 
                         $stmt->close();
@@ -146,3 +165,4 @@
     </footer>
 </body>
 </html>
+
