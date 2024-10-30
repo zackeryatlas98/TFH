@@ -83,6 +83,11 @@
 
             // Show a motivational quote on page load
             showMotivationalQuote();
+
+            // Reminder to update goals
+            setInterval(function() {
+                alert('Reminder: Have you updated your financial goals today? Stay on track!');
+            }, 300000); // Remind every 5 minutes // Remind every 30 seconds
         });
     </script>
     <style>
@@ -245,5 +250,21 @@
 
                         while ($row = $result->fetch_assoc()) {
                             echo "<li class='notification-item'>" . htmlspecialchars($row['notification_text']) . "</li>";
-                       
+                        }
 
+                        $stmt->close();
+                        $conn->close();
+                        ?>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 The Financial Hookup. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
