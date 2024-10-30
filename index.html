@@ -21,7 +21,9 @@
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#learn">Learn & Improve Credit</a></li>
                     <li><a href="#premium">Premium Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
                 </ul>
             </nav>
         </div>
@@ -55,7 +57,85 @@
             <div class="container">
                 <h2>Premium Services</h2>
                 <p>Ready to take your credit to the next level? Explore our advanced courses and personalized coaching to achieve your goals faster.</p>
+                <div class="premium-details">
+                    <div class="premium-tier">
+                        <h3>Basic Plan</h3>
+                        <p>Access advanced credit-building tools and resources.</p>
+                        <p>Price: $9.99/month</p>
+                    </div>
+                    <div class="premium-tier">
+                        <h3>Pro Plan</h3>
+                        <p>Personalized coaching and advanced analytics for faster growth.</p>
+                        <p>Price: $19.99/month</p>
+                    </div>
+                </div>
                 <a href="#" class="cta-button">Learn More</a>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <h2>Testimonials & Success Stories</h2>
+                <p>See how The Financial Hookup has helped others achieve their credit goals and build a better financial future.</p>
+                <div class="testimonial">
+                    <p>"Thanks to The Financial Hookup, I was able to improve my credit score by 100 points in just 6 months!" - Alex R.</p>
+                </div>
+                <div class="testimonial">
+                    <p>"The personalized coaching made all the difference. I feel empowered and in control of my finances now." - Maria L.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>We'd love to hear from you! If you have questions or need assistance, please get in touch.</p>
+                <form class="contact-form" action="contact.php" method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+
+                    <button type="submit" class="cta-button">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="subscribe" class="subscribe">
+            <div class="container">
+                <h2>Subscribe for Updates</h2>
+                <p>Stay informed about new resources and updates to help you build your financial future.</p>
+                <form class="subscribe-form" action="subscribe.php" method="POST">
+                    <input type="email" id="subscribe-email" name="subscribe-email" placeholder="Enter your email" required>
+                    <button type="submit" class="cta-button">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="dashboard" class="dashboard">
+            <div class="container">
+                <h2>Your Dashboard</h2>
+                <p>Track your progress, complete challenges, and reach your financial goals!</p>
+                <div class="progress">
+                    <h3>Your Progress</h3>
+                    <p>Level 3 - Credit Rookie</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 40%;"></div>
+                    </div>
+                    <p>40% to the next level</p>
+                </div>
+                <div class="challenges">
+                    <h3>Challenges</h3>
+                    <ul>
+                        <li>Complete the "Credit Basics" course - <span class="status">In Progress</span></li>
+                        <li>Make your first budget - <span class="status">Not Started</span></li>
+                        <li>Track expenses for 1 month - <span class="status">Not Started</span></li>
+                    </ul>
+                </div>
             </div>
         </section>
     </main>
