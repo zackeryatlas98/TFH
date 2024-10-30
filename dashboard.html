@@ -42,8 +42,89 @@
                     status.text('Not Started');
                 }
             });
+
+            // Goal completion modal
+            $('.cta-button').on('click', function(e) {
+                e.preventDefault();
+                var goalText = $('#goal').val();
+                var deadline = $('#goal-deadline').val();
+                if (goalText && deadline) {
+                    $('<div class="modal">' +
+                      '<div class="modal-content">' +
+                      '<p>Goal: ' + goalText + '</p>' +
+                      '<p>Deadline: ' + deadline + '</p>' +
+                      '<button class="close-modal">Close</button>' +
+                      '</div>' +
+                      '</div>').appendTo('body');
+                }
+            });
+
+            // Close modal
+            $(document).on('click', '.close-modal', function() {
+                $('.modal').fadeOut(500, function() {
+                    $(this).remove();
+                });
+            });
+
+            // Show motivational quote
+            function showMotivationalQuote() {
+                var quotes = [
+                    "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+                    "Believe you can and you're halfway there.",
+                    "Don’t watch the clock; do what it does. Keep going.",
+                    "The secret of getting ahead is getting started.",
+                    "It always seems impossible until it’s done."
+                ];
+                var randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                $('<div class="motivational-quote">' + randomQuote + '</div>').appendTo('.dashboard').fadeIn(1000).delay(5000).fadeOut(1000, function() {
+                    $(this).remove();
+                });
+            }
+
+            // Show a motivational quote on page load
+            showMotivationalQuote();
         });
     </script>
+    <style>
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .close-modal {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .close-modal:hover {
+            background: #0056b3;
+        }
+        .motivational-quote {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f0f0f0;
+            border-left: 5px solid #007bff;
+            font-style: italic;
+            font-size: 1.2em;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -164,21 +245,5 @@
 
                         while ($row = $result->fetch_assoc()) {
                             echo "<li class='notification-item'>" . htmlspecialchars($row['notification_text']) . "</li>";
-                        }
+                       
 
-                        $stmt->close();
-                        $conn->close();
-                        ?>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 The Financial Hookup. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html>
