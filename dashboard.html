@@ -87,7 +87,30 @@
             // Reminder to update goals
             setInterval(function() {
                 alert('Reminder: Have you updated your financial goals today? Stay on track!');
-            }, 300000); // Remind every 5 minutes
+            }, 600000); // Remind every 10 minutes
+
+            // Interactive Financial Quiz
+            $('.quiz-button').on('click', function() {
+                $('<div class="modal">' +
+                  '<div class="modal-content">' +
+                  '<h3>Financial Literacy Quiz</h3>' +
+                  '<p>Question: What is the recommended percentage of income to save each month?</p>' +
+                  '<button class="quiz-option" data-answer="correct">20%</button>' +
+                  '<button class="quiz-option" data-answer="wrong">10%</button>' +
+                  '<button class="quiz-option" data-answer="wrong">5%</button>' +
+                  '<button class="close-modal">Close</button>' +
+                  '</div>' +
+                  '</div>').appendTo('body');
+            });
+
+            // Handle quiz answer
+            $(document).on('click', '.quiz-option', function() {
+                if ($(this).data('answer') === 'correct') {
+                    alert('Correct! Great job!');
+                } else {
+                    alert('Incorrect. Keep learning and try again!');
+                }
+            });
         });
     </script>
     <style>
@@ -153,6 +176,18 @@
         .template-list a:hover {
             text-decoration: underline;
         }
+        .quiz-button {
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .quiz-button:hover {
+            background: #218838;
+        }
     </style>
 </head>
 <body>
@@ -206,48 +241,5 @@
                     $stmt->close();
                     $conn->close();
 
-                    echo "<p>Level $progress_level - Credit Rookie</p>";
-                    echo "<div class='progress-bar'><div class='progress-bar-fill' data-progress='$progress_percentage' style='width: 0;'></div></div>";
-                    echo "<p>$progress_percentage% to the next level</p>";
-                    ?>
-                </div>
-
-                <div class="badges">
-                    <h3>Your Badges</h3>
-                    <div class="badge-container">
-                        <?php
-                        // Reconnect to database
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-
-                        // Fetch user badges
-                        $sql = "SELECT badge_name FROM user_badges WHERE user_id = ?";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->bind_param("i", $user_id);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<div class='badge'>" . htmlspecialchars($row['badge_name']) . "</div>";
-                        }
-
-                        $stmt->close();
-                        $conn->close();
-                        ?>
-                    </div>
-                </div>
-
-                <div class="challenges">
-                    <h3>Challenges</h3>
-                    <ul>
-                        <li class="challenge-item">Complete the "Credit Basics" course - <span class="status">In Progress</span></li>
-                        <li class="challenge-item">Make your first budget - <span class="status">Not Started</span></li>
-                        <li class="challenge-item">Track expenses for 1 month - <span class="status">Not Started</span></li>
-                    </ul>
-                </div>
-
-                <div class="goal-setting">
-                    <h3>Set Your Financial Goals</h3>
-                    <form class="goal-form" action="save_goal.php" method="POST">
-                        <label for="goal">Financial Goal:</label>
-                        <input type="text" id="goal" name="goal" placeholder
+                    echo "<p>Level $progress_level - Credit Rookie</p
 
