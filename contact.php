@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = $_POST['message'];
 
     // Example: Sending email to site owner
-    $to = "youremail@domain.com";
+    $to = "zack@pulsafi.com";
     $subject = "New Contact Form Submission from $name";
     $body = "Name: $name\nEmail: $email\nMessage: $message";
     $headers = "From: $email";
