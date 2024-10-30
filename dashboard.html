@@ -32,19 +32,61 @@
 
                 <div class="progress">
                     <h3>Your Progress</h3>
-                    <p>Level 3 - Credit Rookie</p>
-                    <div class="progress-bar">
-                        <div class="progress-bar-fill" style="width: 40%;"></div>
-                    </div>
-                    <p>40% to the next level</p>
+                    <?php
+                    session_start();
+                    $user_id = $_SESSION['user_id'];
+                    
+                    // Database connection details
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "financial_hookup";
+
+                    // Create connection
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    // Fetch user progress
+                    $sql = "SELECT progress_level, progress_percentage FROM user_progress WHERE user_id = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("i", $user_id);
+                    $stmt->execute();
+                    $stmt->bind_result($progress_level, $progress_percentage);
+                    $stmt->fetch();
+                    $stmt->close();
+                    $conn->close();
+
+                    echo "<p>Level $progress_level - Credit Rookie</p>";
+                    echo "<div class='progress-bar'><div class='progress-bar-fill' style='width: $progress_percentage%;'></div></div>";
+                    echo "<p>$progress_percentage% to the next level</p>";
+                    ?>
                 </div>
 
                 <div class="badges">
                     <h3>Your Badges</h3>
                     <div class="badge-container">
-                        <div class="badge">Credit Beginner</div>
-                        <div class="badge">Budget Master</div>
-                        <div class="badge">Savings Starter</div>
+                        <?php
+                        // Reconnect to database
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+
+                        // Fetch user badges
+                        $sql = "SELECT badge_name FROM user_badges WHERE user_id = ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bind_param("i", $user_id);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<div class='badge'>" . htmlspecialchars($row['badge_name']) . "</div>";
+                        }
+
+                        $stmt->close();
+                        $conn->close();
+                        ?>
                     </div>
                 </div>
 
@@ -73,8 +115,24 @@
                 <div class="notifications">
                     <h3>Notifications</h3>
                     <ul>
-                        <li>Your goal to save $500 is 25% complete. Keep going!</li>
-                        <li>New course available: "Advanced Credit Management"</li>
+                        <?php
+                        // Reconnect to database
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+
+                        // Fetch user notifications
+                        $sql = "SELECT notification_text FROM notifications WHERE user_id = ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bind_param("i", $user_id);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<li>" . htmlspecialchars($row['notification_text']) . "</li>";
+                        }
+
+                        $stmt->close();
+                        $conn->close();
+                        ?>
                     </ul>
                 </div>
             </div>
